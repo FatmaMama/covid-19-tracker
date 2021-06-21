@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import InfoBox from './components/InfoBox';
+import Map from './components/Map';
+import Table from './components/Table';
 import './App.css';
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [countryInfo, setCountryInfo] = useState({});
   const [country, setInputCountry] = useState("worldwide");
+  const [tableData,setTableData] = useState([])
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -22,6 +25,8 @@ function App() {
         const countries = data.map(country => country.country
         )
         setCountries(countries)
+        let sortedData = [...data].sort((a,b) => b.cases - a.cases);
+        setTableData(sortedData)
       })
     }
     getCountriesData()
@@ -40,52 +45,13 @@ function App() {
     .then(data => {
       setInputCountry(countryName)
       setCountryInfo(data)
-      console.log(data)
-      console.log("countryInfoooo", countryInfo)
     })
   }
 
-  // useEffect(() => {
-  //   const getCountriesData = async () => {
-  //     fetch("https://disease.sh/v3/covid-19/countries")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         const countries = data.map((country) => ({
-  //           name: country.country,
-  //           value: country.countryInfo.iso2,
-  //         }));
-          
-  //         setCountries(countries);
-         
-  //       });
-  //   };
-
-  //   getCountriesData();
-  // }, []);
-
-
-
-  // const onCountryChange = async (e) => {
-  //   const countryCode = e.target.value;
-
-  //   const url =
-  //     countryCode === "worldwide"
-  //       ? "https://disease.sh/v3/covid-19/all"
-  //       : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
-  //   await fetch(url)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setInputCountry(countryCode);
-  //       setCountryInfo(data);
-  //       console.log(data)
-  //      console.log("countryInfoooo", countryInfo)
-  //     });
-  // };
-
   return (
     <div className="app">
-      <div className="container">
-        <div className="row">
+      
+        <div className="row mx-5">
           <div className="col-lg-8 app__left">
 
             <div className="row app__header">
@@ -106,7 +72,7 @@ function App() {
                 </select>
               </div>
             </div>
-            <div className="row my-3 app__stats">
+            <div className="row my-4 app__stats">
                 <div className="col-lg-4">
                   <InfoBox title="Coronavirus cases" 
                   cases={countryInfo.todayCases} 
@@ -125,15 +91,19 @@ function App() {
                   total={countryInfo.deaths} />
                 </div>
             </div>
+            <Map />
           </div>
+          
 
 
-          <div className="col-lg-4 bg-white app__right">
-            World
+          <div className="card col-lg-4 bg-white app__right">
+            <h4>Live Cases By Country</h4>
+            <Table countries={tableData} />
+            <h4>Worldwide New Cases</h4>
           </div>
 
         </div>
-      </div>
+      
     </div>
   );
 }

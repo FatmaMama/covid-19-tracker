@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f6fa;
+}
+
+.app {
+    margin-top: 15px;
+}
+
+.dropdown {
+    background-color: white;
+    border: 2px solid #a8a8a8;
+}
+
+.form-select {
+    width: 50%
+}

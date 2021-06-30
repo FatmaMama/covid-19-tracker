@@ -3,6 +3,7 @@ import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
 import LineGraph from './components/LineGraph';
+import "leaflet/dist/leaflet.css";
 import './App.css';
 
 function App() {
@@ -10,7 +11,9 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [countryInfo, setCountryInfo] = useState({});
   const [country, setInputCountry] = useState("worldwide");
-  const [tableData,setTableData] = useState([])
+  const [tableData,setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -92,7 +95,7 @@ function App() {
                   total={countryInfo.deaths} />
                 </div>
             </div>
-            <Map />
+            <Map center={mapCenter} zoom={mapZoom} />
           </div>
           
 

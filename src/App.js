@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
+import LineGraph from './components/LineGraph';
 import './App.css';
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
             <h4>Live Cases By Country</h4>
             <Table countries={tableData} />
             <h4>Worldwide New Cases</h4>
+            <LineGraph />
           </div>
 
         </div>

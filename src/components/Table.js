@@ -3,14 +3,15 @@ import './Table.css'
 
 export default function Table({ countries }) {
     return (
-        <div className="table">
+        <div className="table__countries">
+            <table>
             {countries.map(country => (
                 <tr>
                     <td>{country.country}</td>
                     <td><strong>{country.cases}</strong></td>
                 </tr>
             ))}
-            
+            </table>
         </div>
     )
 }

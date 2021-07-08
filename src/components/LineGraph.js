@@ -71,7 +71,7 @@ function LineGraph({ casesType }) {
         fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
         .then(resp => resp.json())
         .then(data => {
-            const chartData = buildChartData(data, 'cases')
+            const chartData = buildChartData(data, casesType)
             setData(chartData)
         })
     }, [])

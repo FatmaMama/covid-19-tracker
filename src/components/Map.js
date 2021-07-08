@@ -51,10 +51,10 @@ const showDataOnMap = (data, casesType = "cases") =>
     </Circle>
   ));
 
-export default function Map({ center, zoom, countries, casesType }) {
+export default function Map({ center, zoom, countries, casesType}) {
 
   return (
-    <div className="map">
+    <div className="map my-md-3 my-sm-3">
       <MapLeaflet center={center} zoom={zoom}>
         <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

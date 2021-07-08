@@ -1,6 +1,22 @@
+.infoBox{
+    cursor: pointer;
+}
+
 .infoBox__cases {
     color: #cc1034; 
     font-weight: 600;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
-  }
+}
+
+.infoBox--selected {
+    border-top: 10px solid greenyellow;
+}
+
+.infoBox--red {
+    border-top: 10px solid red;
+}
+
+.infoBox__cases--green {
+    color: lightgreen;
+}

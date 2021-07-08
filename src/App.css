@@ -20,3 +20,7 @@ body {
 .form-select {
     width: 50%
 }
+
+.side__title{
+    padding: 5px;
+}

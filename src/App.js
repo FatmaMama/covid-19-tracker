@@ -18,7 +18,8 @@ function App() {
   const [tableData,setTableData] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
-  const [mapCountries, setMapCountries] = useState([])
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState('cases');
 
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
@@ -36,8 +37,6 @@ function App() {
         setCountries(countries);
         let sortedData = [...data].sort((a,b) => b.cases - a.cases);
         setTableData(sortedData);
-        
-        console.log(mapCountries)
       })
     }, [])
 
@@ -65,11 +64,11 @@ function App() {
           <div className="col-lg-8 app__left">
 
             <div className="row app__header">
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-md-6 col-sm-5 ">
                 <h3>Covid-19 Tracker</h3>
               </div>
 
-              <div className="col-lg-6 d-flex justify-content-end align-items-center">
+              <div className="col-lg-6 col-md-6 col-sm-7  d-flex justify-content-end align-items-center">
                 <select 
                     className="form-select" 
                     onChange={onCountryChange} 
@@ -82,35 +81,46 @@ function App() {
                 </select>
               </div>
             </div>
-            <div className="row my-4 app__stats">
-                <div className="col-lg-4">
-                  <InfoBox title="Coronavirus cases" 
+            <div className="row my-2 app__stats">
+                <div className="col-lg-4 col-md-4">
+                  <InfoBox 
+                  isRed
+                  active={casesType==='cases'}
+                  onClick={e => setCasesType('cases')}
+                  title="Coronavirus cases" 
                   cases={prettyPrintStat(countryInfo.todayCases)} 
                   total={prettyPrintStat(countryInfo.cases)} />
                 </div>
 
-                <div className="col-lg-4">
-                  <InfoBox title="Recovered"
+                <div className="col-lg-4 col-md-4">
+                  <InfoBox 
+                  active={casesType==='recovered'}
+                  onClick={e => setCasesType('recovered')}
+                  title="Recovered"
                    cases={prettyPrintStat(countryInfo.todayRecovered)} 
                   total={prettyPrintStat(countryInfo.recovered)} />
                 </div>
 
-                <div className="col-lg-4">
-                  <InfoBox title="Deaths" 
+                <div className="col-lg-4 col-md-4">
+                  <InfoBox 
+                  isRed
+                  active={casesType==='deaths'}
+                  onClick={e => setCasesType('deaths')}
+                  title="Deaths" 
                   cases={prettyPrintStat(countryInfo.todayDeaths)} 
                   total={prettyPrintStat(countryInfo.deaths)} />
                 </div>
             </div>
-            <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} />
+            <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} casesType={casesType} />
           </div>
           
 
 
           <div className="card col-lg-4 bg-white app__right">
-            <h4>Live Cases By Country</h4>
+            <h4 className="side__title">Live Cases By Country</h4>
             <Table countries={tableData} />
-            <h4>Worldwide New Cases</h4>
-            <LineGraph />
+            <h4 className="side__title">Worldwide New {casesType}</h4>
+            <LineGraph casesType={casesType} />
           </div>
 
         </div>

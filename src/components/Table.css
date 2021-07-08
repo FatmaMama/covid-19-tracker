@@ -1,5 +1,5 @@
 .table__countries {
-    margin-top: 20px;
+    /* margin-top: 10px; */
     overflow: scroll;
     color: #6a5d5d;
     background-color: white;
@@ -16,7 +16,7 @@ table {
 }
   
 .table__countries td {
-    padding: 0.5rem;
+    padding: 0.4rem;
     border: none;
 }
   

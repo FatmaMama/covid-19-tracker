@@ -7,7 +7,26 @@
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
   }
   
-  .map .leaflet-container {
+.map .leaflet-container {
     height: 100%;
-    
-  }
+}
+
+.info-flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 8px;
+}
+
+.info-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
+.info-confirmed,
+.info-recovered,
+.info-deaths {
+  font-size: 12px;
+  margin-top: 5px;
+}
